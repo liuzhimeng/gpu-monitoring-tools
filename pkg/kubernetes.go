@@ -76,7 +76,7 @@ func (p *PodMapper) Process(metrics [][]Metric) error {
 			if err != nil {
 				return err
 			}
-			logrus.Infof("gpuid: %s, pod: %s, i: %s, j: %s", GPUID, deviceToPod[GPUID], i, j)
+			logrus.Infof("gpuid: %s, pod: %s, i: %d, j: %d", GPUID, deviceToPod[GPUID], i, j)
 			if !p.Config.UseOldNamespace {
 				metrics[i][j].Attributes[podAttribute] = deviceToPod[GPUID].Name
 				metrics[i][j].Attributes[namespaceAttribute] = deviceToPod[GPUID].Namespace
@@ -130,9 +130,8 @@ func ToDeviceToPod(devicePods *podresourcesapi.ListPodResourcesResponse) map[str
 		for _, container := range pod.GetContainers() {
 			for _, device := range container.GetDevices() {
 
-				logrus.Info(device.GetResourceName(), nvidiaResourceName)
 				if device.GetResourceName() != nvidiaResourceName {
-					continue
+					logrus.Info(device.GetResourceName(), nvidiaResourceName)
 				}
 
 				podInfo := PodInfo{
