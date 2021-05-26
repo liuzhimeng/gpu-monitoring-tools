@@ -14,7 +14,7 @@
 
 DOCKER   ?= docker
 MKDIR    ?= mkdir
-REGISTRY ?= nvidia
+REGISTRY ?= EigenLab
 
 DCGM_VERSION   := 2.1.8
 GOLANG_VERSION := 1.14.2
