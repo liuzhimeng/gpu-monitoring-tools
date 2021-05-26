@@ -76,7 +76,7 @@ func (p *PodMapper) Process(metrics [][]Metric) error {
 			if err != nil {
 				return err
 			}
-			logrus.Infof("pod: %s", deviceToPod[GPUID])
+			logrus.Infof("gpuid: %s, pod: %s", GPUID, deviceToPod[GPUID])
 			if !p.Config.UseOldNamespace {
 				metrics[i][j].Attributes[podAttribute] = deviceToPod[GPUID].Name
 				metrics[i][j].Attributes[namespaceAttribute] = deviceToPod[GPUID].Namespace
