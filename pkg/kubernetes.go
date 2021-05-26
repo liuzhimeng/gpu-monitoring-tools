@@ -131,7 +131,7 @@ func ToDeviceToPod(devicePods *podresourcesapi.ListPodResourcesResponse) map[str
 			for _, device := range container.GetDevices() {
 
 				if device.GetResourceName() != nvidiaResourceName {
-					continue
+					logrus.Info(device.GetResourceName())
 				}
 
 				podInfo := PodInfo{
