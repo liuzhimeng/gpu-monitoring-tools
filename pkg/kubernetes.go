@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -141,8 +142,16 @@ func ToDeviceToPod(devicePods *podresourcesapi.ListPodResourcesResponse) map[str
 				}
 
 				logrus.Info(device.GetDeviceIds())
-				for _, uuid := range device.GetDeviceIds() {
-					deviceToPodMap[uuid] = podInfo
+				rawDeviceIds := device.GetDeviceIds()
+				var parsedDeviceIds []string
+				for _, uuid := range rawDeviceIds {
+					words := strings.Split(uuid, "-_-")
+					parsedDeviceIds = append(parsedDeviceIds, words[0])
+				}
+
+				logrus.Info(parsedDeviceIds)
+				for _, newUuid := range parsedDeviceIds {
+					deviceToPodMap[newUuid] = podInfo
 				}
 			}
 		}
