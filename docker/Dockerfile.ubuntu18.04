@@ -4,6 +4,8 @@ WORKDIR /go/src/github.com/NVIDIA/gpu-monitoring-tools
 
 COPY . .
 
+ENV GOPROXY="https://goproxy.io"
+
 RUN make binary check-format
 
 FROM nvcr.io/nvidia/cuda:11.2.1-base-ubuntu18.04
